@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
+<title>Accueil - Fresh Bakery</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #1d1511; background: #fff; line-height: 1.5; }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3, p { margin: 0; }
+  a[href^="tel"]:not(.button), a[x-apple-data-detectors] { color: inherit; text-decoration: none; }
+
+  /* Largeur du contenu et marges latérales */
+  .wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
+
+  /* Barre fixe en haut (au-dessus de la photo, pas dedans) */
+  html { scroll-behavior: smooth; }
+  .topbar { position: sticky; top: 0; z-index: 10; background: #fff; }
+  .topbar .wrap { padding: 16px 0; text-align: right; }
+  .topbar a { color: #1d1511; font-size: 14px; text-decoration: none; }
+
+  /* Accueil */
+  .hero { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: 780px; color: #fff; overflow: hidden; }
+  .hero > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(24,12,5,.5), transparent 62%); }
+  .topbar .logo { margin-right: auto; color: #1d1511; font-size: 22px; font-weight: 800; text-transform: uppercase; }
+  .hero-text { padding-bottom: 90px; }
+  .hero h1 { font-size: 52px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
+  .hero h1 span { display: block; font-weight: 400; }
+  .hero hr { max-width: 640px; margin: 22px 0 28px; border: 0; border-top: 1px solid rgba(255,255,255,.75); }
+  .hero .button { padding: 14px 40px; font-size: 15px; }
+  .button { display: inline-block; padding: 12px 26px; border: 1.5px solid currentColor; border-radius: 999px; color: inherit; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+
+  /* Bienvenue */
+  .welcome { padding-top: 28px; }
+  .welcome h2 { padding-bottom: 14px; border-bottom: 1px solid #1d1511; font-size: 44px; line-height: 1.05; letter-spacing: -0.03em; }
+  .welcome p { margin-top: 10px; max-width: 60ch; color: #000; font-size: calc(1.15rem + 2px); line-height: 1.35; }
+  .welcome img { width: 100%; height: 400px; margin-top: 40px; object-fit: cover; border-radius: 10px; }
+
+  /* Produits */
+  .menu { padding-top: 64px; }
+  #breads { scroll-margin-top: 60px; }
+  .menu h2 { font-size: 50px; line-height: 1.05; letter-spacing: -0.03em; }
+  .menu .tagline { margin-top: 10px; max-width: 34ch; color: #9c5a28; font-size: 30px; line-height: 1.35; }
+  .products { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-top: 28px; }
+  .product { display: grid; grid-template-columns: 11fr 9fr; overflow: hidden; border-top: 1px solid #1d1511; border-bottom: 1px solid #1d1511; }
+
+  .product img { width: 100%; height: 100%; min-height: 190px; aspect-ratio: 4 / 3; object-fit: cover; }
+  .product div { padding: 18px 0 18px 20px; }
+  .product h3 { font-size: 20px; line-height: 1.25; }
+  .product p { font-size: 18px; }
+
+  /* Commande */
+  .order { margin-top: 80px; padding: 130px 0; background: #763c1d; color: #fff; text-align: center; }
+  .order h2 { font-size: 46px; letter-spacing: -0.03em; }
+  .order p { max-width: 40ch; margin: 14px auto 0; font-size: 20px; }
+  .order .phone { margin-top: 14px; font-size: 14px; opacity: .9; }
+  .order .button { margin-top: 28px; padding-left: 72px; padding-right: 72px; background: #fff; color: #000; border-color: #fff; font-weight: 700; }
+
+  /* Pied de page */
+  .footer img { width: 100%; height: 400px; margin: 48px 0 28px; object-fit: cover; }
+  .footer-info { display: flex; justify-content: space-between; gap: 24px 48px; padding: 24px 0 40px; border-top: 1px solid #1d1511; }
+  .footer-info strong.name { font-size: 2.4rem; line-height: 1; text-transform: uppercase; letter-spacing: -0.03em; }
+  .footer-info p { font-size: 14px; color: #1d1511; }
+  .social { display: flex; gap: 12px; margin-top: 28px; }
+
+  .brand-block { flex: 1 1 auto; }
+  .footer-info > div:not(.brand-block) { flex: 0 0 auto; width: 240px; }
+  .legal { background: #000; padding: 18px 0; }
+  .legal .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+  .legal a { color: #fff; font-size: 13px; text-decoration: none; }
+  .legal a:hover { text-decoration: underline; }
+  .social a { display: block; width: 22px; height: 22px; color: #1d1511; }
+  .social svg { display: block; width: 100%; height: 100%; }
+
+  @media (max-width: 1000px) {
+    .products { grid-template-columns: 1fr; }
+    .hero { min-height: 540px; }
+    .hero-text { padding-bottom: 48px; }
+    .order { margin-top: 56px; padding: 64px 0; }
+    .welcome img, .footer img { height: 150px; }
+    .footer-info { flex-direction: column; }
+    .brand-block { display: contents; }
+    .footer-info > div:not(.brand-block) { width: auto; }
+    .social { order: 1; margin-top: 0; }
+    .wrap { width: calc(100% - 32px); }
+    .hero h1 { font-size: 60px; }  }
+
+  /* Barre du haut */
+  .topbar .wrap { display: flex; justify-content: flex-end; align-items: center; gap: 20px; text-align: right; }
+  .topbar a.top-order { padding: 8px 18px; border: 1.5px solid #1d1511; border-radius: 999px; font-weight: 700; }
+  button, a, input, textarea { touch-action: manipulation; }
+
+  /* Formulaire de commande */
+  .order { padding: 90px 0; }
+  .order-form { max-width: 560px; margin: 32px auto 0; padding: 24px; border-radius: 22px; background: #fff; color: #1d1511; text-align: left; }
+  .order-form p { max-width: none; margin: 0; font-size: 13px; }
+  .field { display: block; margin-bottom: 12px; }
+  .field > span { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+  .field input, .field textarea { display: block; width: 100%; padding: 11px 14px; border: 1.5px solid #d4d4d4; border-radius: 12px; background: #fff; color: #1d1511; font: inherit; font-size: 16px; transition: box-shadow .15s, border-color .15s; }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .field input::placeholder, .field textarea::placeholder { color: #9a9a9a; }
+  .field input:focus, .field textarea:focus { outline: 0; border-color: #1d1511; box-shadow: 0 0 0 4px rgba(29,21,17,.12); }
+  .field[hidden] { display: none; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row2 .field { min-width: 0; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 14px; padding: 3px; border-radius: 999px; background: #f2f0ee; }
+  .seg label { position: relative; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg span { display: block; padding: 9px 6px; border-radius: 999px; text-align: center; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .seg input:checked + span { background: #1d1511; color: #fff; }
+  .seg input:focus-visible + span { outline: 2px solid #1d1511; outline-offset: 2px; }
+  .form-error { min-height: 18px; margin-bottom: 6px; color: #b3261e; }
+  .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border: 0; border-radius: 999px; background: #25d366; color: #06361a; font: inherit; font-size: 15px; font-weight: 800; box-shadow: 0 8px 20px rgba(37,211,102,.35); cursor: pointer; }
+  .send svg { width: 22px; height: 22px; }
+  .order .phone a { text-decoration: underline; }
+
+  /* Lignes produit, total, boutons WhatsApp */
+  .line { display: grid; grid-template-columns: 1fr 84px 36px; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .line select { width: 100%; padding: 11px 12px; border: 1.5px solid #d4d4d4; border-radius: 12px; background: #fff; color: #1d1511; font: inherit; font-size: 16px; }
+  .line select:focus { outline: 0; border-color: #1d1511; box-shadow: 0 0 0 4px rgba(29,21,17,.12); }
+  .line .rm { width: 36px; height: 36px; border: 0; border-radius: 50%; background: #f2f0ee; color: #1d1511; font-size: 18px; line-height: 1; cursor: pointer; }
+  .line .rm[hidden] { display: none; }
+  .add-line { margin-bottom: 14px; padding: 9px 16px; border: 1.5px dashed #1d1511; border-radius: 999px; background: none; color: #1d1511; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .total { display: flex; justify-content: space-between; margin-bottom: 14px; padding: 12px 0; border-top: 1px solid #e5e1dd; font-size: 16px; font-weight: 800; }
+  .send-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 520px) { .send-row { grid-template-columns: 1fr; } }
+  .topbar .logo img { height: 40px; width: auto; max-width: none; }
+</style>
+</head>
+<body id="top">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Fresh Bakery"><img src="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png" alt=""></a>
+    <a href="#top">Accueil</a>
+    
+  </div>
+</header>
+
+<!-- Accueil -->
+<section class="hero">
+  <img src="https://i.ibb.co/Cp4JCN2y/Image-Chat-GPT-28-sept-2026-a-16-56-52-png.webp" alt="Croissants dorés sur un plateau en bois">
+  <div class="wrap hero-text">
+    <h1>Frais du four.<span>En ligne. À l'heure.</span></h1>
+    <hr>
+    <a class="button" href="#breads">Commandez frais aujourd'hui</a>
+  </div>
+</section>
+
+<!-- Bienvenue -->
+<section class="wrap welcome">
+  <h2>Bienvenue dans notre boulangerie en ligne !</h2>
+  <p>Chaque pain, cookie et viennoiserie est préparé sur commande et arrive juste quand vous en avez besoin.</p>
+  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="Croissants dorés au beurre">
+</section>
+
+<!-- Pains -->
+<section class="wrap menu" id="breads">
+  <h2>Pains</h2>
+  <p class="tagline">Croustillants, moelleux et pleins d'âme</p>
+  <div class="products">
+    <article class="product" data-id="sourdough" data-name="Pain au levain" data-price="1150"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Pain au levain"><div><h3>Pain au levain</h3><p class="price">1 150 DA</p></div></article>
+    <article class="product" data-id="baguette" data-name="Baguette" data-price="750"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Baguette"><div><h3>Baguette</h3><p class="price">750 DA</p></div></article>
+    <article class="product" data-id="wheat-loaf" data-name="Pain complet" data-price="800"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Pain complet"><div><h3>Pain complet</h3><p class="price">800 DA</p></div></article>
+    <article class="product" data-id="brioche-loaf" data-name="Pain brioché" data-price="1000"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Pain brioché"><div><h3>Pain brioché</h3><p class="price">1 000 DA</p></div></article>
+  </div>
+</section>
+
+<!-- Cookies -->
+<section class="wrap menu">
+  <h2>Cookies</h2>
+  <p class="tagline">Beurrés, moelleux et toujours sortis du four</p>
+  <div class="products">
+    <article class="product" data-id="chocolate-chip" data-name="Pépites de chocolat" data-price="400"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Pépites de chocolat"><div><h3>Pépites de chocolat</h3><p class="price">400 DA</p></div></article>
+    <article class="product" data-id="chocolate-fudge" data-name="Fudge au chocolat" data-price="450"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Fudge au chocolat"><div><h3>Fudge au chocolat</h3><p class="price">450 DA</p></div></article>
+    <article class="product" data-id="oatmeal-raisin" data-name="Avoine et raisins" data-price="350"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Avoine et raisins"><div><h3>Avoine et raisins</h3><p class="price">350 DA</p></div></article>
+    <article class="product" data-id="cookie-box" data-name="Boîte de cookies" data-price="2400"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Boîte de cookies"><div><h3>Boîte de cookies</h3><p class="price">2 400 DA</p></div></article>
+  </div>
+</section>
+
+<!-- Viennoiseries -->
+<section class="wrap menu">
+  <h2>Viennoiseries</h2>
+  <p class="tagline">Des couches délicates, des garnitures généreuses et une finition dorée parfaite</p>
+  <div class="products">
+    <article class="product" data-id="butter-croissant" data-name="Croissant au beurre" data-price="550"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Croissant au beurre"><div><h3>Croissant au beurre</h3><p class="price">550 DA</p></div></article>
+    <article class="product" data-id="fruit-danish" data-name="Danoise aux fruits" data-price="650"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Danoise aux fruits"><div><h3>Danoise aux fruits</h3><p class="price">650 DA</p></div></article>
+    <article class="product" data-id="cinnamon-swirl" data-name="Roulé à la cannelle" data-price="650"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé à la cannelle"><div><h3>Roulé à la cannelle</h3><p class="price">650 DA</p></div></article>
+    <article class="product" data-id="pain-au-chocolat" data-name="Pain Au Chocolat" data-price="700"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Pain Au Chocolat"><div><h3>Pain Au Chocolat</h3><p class="price">700 DA</p></div></article>
+  </div>
+</section>
+
+<!-- Commande -->
+<section class="order" id="order">
+  <div class="wrap">
+    <h2>Prêt à commander ?</h2>
+    <p>Dites-nous ce que vous voulez, en quelle quantité et pour quand.</p>
+    <form class="order-form" id="orderForm" novalidate>
+      <div class="seg" role="radiogroup" aria-label="Type de commande"><label><input type="radio" name="mode" value="À emporter" checked><span>À emporter</span></label><label><input type="radio" name="mode" value="Livraison"><span>Livraison</span></label></div>
+      <div class="row2">
+        <label class="field"><span>Nom</span><input type="text" name="name" autocomplete="name" placeholder="Votre nom" required></label>
+        <label class="field"><span>Téléphone</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Numéro de téléphone" required></label>
+      </div>
+      <label class="field" id="addressField" hidden><span>Adresse de livraison</span><input type="text" name="address" autocomplete="street-address" placeholder="Rue, ville"></label>
+      <div class="field"><span>Votre commande</span><div id="lines"></div><button class="add-line" type="button" id="addLine">+ Ajouter un produit</button></div>
+      <div class="total"><span>Total</span><span id="total">0 DA</span></div>
+      <label class="field"><span>Remarques (optionnel)</span><textarea name="notes" placeholder="Allergies, date et heure souhaitées, message sur la boîte..."></textarea></label>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="send-row"><button class="send" type="button" data-who="Homme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Homme</span></button><button class="send" type="button" data-who="Femme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Femme</span></button></div>
+    </form>
+    <p class="phone">Ou appelez-nous : <a href="tel:+11234567890">(123) 456 7890</a></p>
+  </div>
+</section>
+
+<!-- Pied de page -->
+<footer class="wrap footer">
+  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="Baguette et pains de campagne">
+  <div class="footer-info">
+    <div class="brand-block">
+      <strong class="name">Fresh Bakery</strong>
+      <!-- Réseaux sociaux -->
+      <div class="social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M13 20v-7h2.4l.4-3H13V8.3c0-.8.3-1.3 1.4-1.3H16V4.3c-.3 0-1.2-.1-2.2-.1C11.6 4.2 10 5.5 10 8v2H7.6v3H10v7z" fill="#fff"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+    </div>
+    <div><strong>Adresse</strong><p>123 Anywhere St. Any City, State, Any Country<br>(123) 456 7890</p></div>
+    <div><strong>Écrivez-nous</strong><p>freshbakery@reallygreatsite.com</p></div>
+  </div>
+</footer>
+
+<!-- Barre légale -->
+<nav class="legal" aria-label="Mentions légales">
+  <div class="wrap">
+    <a href="#">Conditions générales</a>
+    <a href="#">Politique de confidentialité</a>
+  </div>
+</nav>
+
+<script>
+(function () {
+  "use strict";
+  var NUMBERS = { Homme: "213799351775", Femme: "213556731849" };
+  var form = document.getElementById("orderForm");
+  var addressField = document.getElementById("addressField");
+  var errEl = document.getElementById("formError");
+  var linesEl = document.getElementById("lines");
+  var totalEl = document.getElementById("total");
+
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " DA"; }
+
+  // Lecture des produits depuis la page
+  var products = {}, groups = [];
+  document.querySelectorAll(".menu").forEach(function (sec) {
+    var g = { cat: sec.querySelector("h2").textContent, items: [] };
+    sec.querySelectorAll(".product").forEach(function (p) {
+      var item = { id: p.dataset.id, name: p.dataset.name, price: +p.dataset.price };
+      products[item.id] = item; g.items.push(item);
+    });
+    groups.push(g);
+  });
+
+  var prodOptions = '<option value="">Choisir un produit</option>' + groups.map(function (g) {
+    return '<optgroup label="' + g.cat + '">' + g.items.map(function (i) {
+      return '<option value="' + i.id + '">' + i.name + " \u2014 " + fmt(i.price) + "</option>";
+    }).join("") + "</optgroup>";
+  }).join("");
+  var qtyOptions = "";
+  for (var q = 1; q <= 15; q++) qtyOptions += '<option value="' + q + '">' + q + "</option>";
+
+  function addLine() {
+    var d = document.createElement("div");
+    d.className = "line";
+    d.innerHTML = '<select class="prod" aria-label="Produit">' + prodOptions + '</select>' +
+      '<select class="qty" aria-label="Quantité">' + qtyOptions + '</select>' +
+      '<button class="rm" type="button" aria-label="Retirer">\u00d7</button>';
+    linesEl.appendChild(d);
+    refresh();
+  }
+
+  function refresh() {
+    var rows = linesEl.querySelectorAll(".line"), total = 0;
+    rows.forEach(function (r) {
+      r.querySelector(".rm").hidden = rows.length === 1;
+      var p = products[r.querySelector(".prod").value];
+      if (p) total += p.price * (+r.querySelector(".qty").value);
+    });
+    totalEl.textContent = fmt(total);
+  }
+
+  linesEl.addEventListener("change", function () { errEl.textContent = ""; refresh(); });
+  linesEl.addEventListener("click", function (e) {
+    if (e.target.classList.contains("rm")) { e.target.parentNode.remove(); refresh(); }
+  });
+  document.getElementById("addLine").addEventListener("click", addLine);
+  addLine();
+
+  form.addEventListener("change", function (e) {
+    if (e.target.name === "mode") { addressField.hidden = e.target.value === "À emporter"; errEl.textContent = ""; }
+  });
+
+  function send(who) {
+    var f = form.elements;
+    var name = f.name.value.trim(), phone = f.phone.value.trim();
+    var digits = phone.replace(/\D/g, "");
+    var mode = f.mode.value, address = f.address.value.trim(), notes = f.notes.value.trim();
+
+    var items = [], total = 0;
+    linesEl.querySelectorAll(".line").forEach(function (r) {
+      var p = products[r.querySelector(".prod").value], qty = +r.querySelector(".qty").value;
+      if (p) { items.push("- " + qty + " x " + p.name + " (" + fmt(p.price * qty) + ")"); total += p.price * qty; }
+    });
+
+    var err = "";
+    if (!name) err = "Veuillez entrer votre nom.";
+    else if (digits.length < 8 || digits.length > 15) err = "Veuillez entrer un numéro de téléphone valide.";
+    else if (mode === "Livraison" && !address) err = "Veuillez entrer votre adresse de livraison.";
+    else if (!items.length) err = "Veuillez choisir au moins un produit.";
+    errEl.textContent = err;
+    if (err) return;
+
+    var msg = "Bonjour Fresh Bakery ! Je souhaite passer commande :\n\n" + items.join("\n") +
+      "\n\nTotal : " + fmt(total) + "\n\n" +
+      "Nom : " + name + "\nTéléphone : " + phone + "\nType : " + mode +
+      (mode === "Livraison" ? "\nAdresse : " + address : "") +
+      (notes ? "\nRemarques : " + notes : "");
+    var url = "https://wa.me/" + NUMBERS[who] + "?text=" + encodeURIComponent(msg);
+    var w = window.open(url, "_blank");
+    if (w) { w.opener = null; } else { window.location.href = url; }
+  }
+
+  form.addEventListener("submit", function (e) { e.preventDefault(); });
+  document.querySelectorAll(".send").forEach(function (b) {
+    b.addEventListener("click", function () { send(b.dataset.who); });
+  });
+})();
+</script>
+</body>
+</html>

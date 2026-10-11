@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
-<title>Accueil - Fresh Bakery</title>
+<title>Mes délices d'Allemagne</title>
+<meta name="description" content="Mes délices d'Allemagne : roulés au beurre fourrés, mini cheesecakes et pots de crème pâte à tartiner, préparés sur commande à Bordj El Bahri, Alger.">
+<meta name="application-name" content="Mes délices d'Allemagne">
+<meta property="og:site_name" content="Mes délices d'Allemagne">
+<meta property="og:title" content="Mes délices d'Allemagne">
+<meta property="og:description" content="Roulés, mini cheesecakes et pots de crème préparés sur commande à Alger.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png">
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #1d1511; background: #fff; line-height: 1.5; }
@@ -66,12 +73,12 @@
   .footer-info p { font-size: 14px; color: #1d1511; }
   .social { display: flex; gap: 12px; margin-top: 28px; }
 
+  .footer .footer-logo { width: auto; height: 80px; max-width: none; margin: 0; object-fit: contain; object-position: left center; align-self: flex-start; }
   .brand-block { flex: 1 1 auto; }
   .footer-info > div:not(.brand-block) { flex: 0 0 auto; width: 240px; }
   .legal { background: #000; padding: 18px 0; }
   .legal .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; }
-  .legal a { color: #fff; font-size: 13px; text-decoration: none; }
-  .legal a:hover { text-decoration: underline; }
+  .legal span { color: #555; font-size: 13px; cursor: default; }
   .social a { display: block; width: 22px; height: 22px; color: #1d1511; }
   .social svg { display: block; width: 100%; height: 100%; }
 
@@ -116,7 +123,7 @@
   .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border: 0; border-radius: 999px; background: #25d366; color: #06361a; font: inherit; font-size: 15px; font-weight: 800; box-shadow: 0 8px 20px rgba(37,211,102,.35); cursor: pointer; }
   .send svg { width: 22px; height: 22px; }
   .send[data-who="Femme"] { order: -1; background: #8e5bd4; color: #fff; box-shadow: 0 8px 20px rgba(142,91,212,.35); }
-  .order .phone a { text-decoration: underline; }
+  .order .phone a { text-decoration: none; }
 
   /* Lignes produit, total, boutons WhatsApp */
   .line { display: grid; grid-template-columns: 1fr 84px 36px; gap: 8px; align-items: center; margin-bottom: 10px; }
@@ -128,14 +135,14 @@
   .total { display: flex; justify-content: space-between; margin-bottom: 14px; padding: 12px 0; border-top: 1px solid #e5e1dd; font-size: 16px; font-weight: 800; }
   .send-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   @media (max-width: 520px) { .send-row { grid-template-columns: 1fr; } }
-  .topbar .logo img { height: 64px; width: auto; max-width: none; }
+  .topbar .logo img { height: 64px; width: auto; max-width: none; object-position: left center; }
 </style>
 </head>
 <body id="top">
 
 <header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Fresh Bakery"><img src="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png" alt=""></a>
+    <a class="logo" href="#top" aria-label="Mes délices d'Allemagne"><img src="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png" alt=""></a>
     <a href="#top">Home</a>
     
   </div>
@@ -143,7 +150,7 @@
 
 <!-- Accueil -->
 <section class="hero">
-  <img src="https://i.ibb.co/Cp4JCN2y/Image-Chat-GPT-28-sept-2026-a-16-56-52-png.webp" alt="Croissants dorés sur un plateau en bois">
+  <img src="https://i.ibb.co/Cp4JCN2y/Image-Chat-GPT-28-sept-2026-a-16-56-52-png.webp" alt="">
   <div class="wrap hero-text">
     <h1>Frais du four.<span>En ligne. À l'heure.</span></h1>
     <hr>
@@ -155,7 +162,7 @@
 <section class="wrap welcome">
   <h2>Bienvenue dans notre boulangerie en ligne !</h2>
   <p>Chaque pain, cookie et viennoiserie est préparé sur commande et arrive juste quand vous en avez besoin.</p>
-  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="Croissants dorés au beurre">
+  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="">
 </section>
 
 <!-- Pains -->
@@ -163,16 +170,16 @@
   <h2>Roulés au beurre fourrés</h2>
   <p class="tagline">Préparé le jour même</p>
   <div class="products">
-    <article class="product" data-id="cacahuetes" data-name="Roulé Cacahuètes" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cacahuètes"><div><h3>Cacahuètes</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="caramel" data-name="Roulé Caramel" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Caramel"><div><h3>Caramel</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="mangue" data-name="Roulé Mangue" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt="Mangue"><div><h3>Mangue</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="pistache" data-name="Roulé Pistache" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Pistache"><div><h3>Pistache</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="framboise" data-name="Roulé Framboise" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt="Framboise"><div><h3>Framboise</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="fraise" data-name="Roulé Fraise" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Fraise"><div><h3>Fraise</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="chocolat" data-name="Roulé Chocolat" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Chocolat"><div><h3>Chocolat</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="cannelle" data-name="Roulé Cannelle" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt="Cannelle"><div><h3>Cannelle</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="mure" data-name="Roulé Mûre" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Mûre"><div><h3>Mûre</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="noisette" data-name="Roulé Noisette" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Noisette"><div><h3>Noisette</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="cacahuetes" data-name="Roulé Cacahuètes" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Cacahuètes</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="caramel" data-name="Roulé Caramel" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Caramel</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="mangue" data-name="Roulé Mangue" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt=""><div><h3>Mangue</h3><p class="price">200 DA</p></div></article>
+    <article class="product" data-id="pistache" data-name="Roulé Pistache" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Pistache</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="framboise" data-name="Roulé Framboise" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt=""><div><h3>Framboise</h3><p class="price">200 DA</p></div></article>
+    <article class="product" data-id="fraise" data-name="Roulé Fraise" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Fraise</h3><p class="price">200 DA</p></div></article>
+    <article class="product" data-id="chocolat" data-name="Roulé Chocolat" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Chocolat</h3><p class="price">200 DA</p></div></article>
+    <article class="product" data-id="cannelle" data-name="Roulé Cannelle" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt=""><div><h3>Cannelle</h3><p class="price">200 DA</p></div></article>
+    <article class="product" data-id="mure" data-name="Roulé Mûre" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Mûre</h3><p class="price">200 DA</p></div></article>
+    <article class="product" data-id="noisette" data-name="Roulé Noisette" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Noisette</h3><p class="price">250 DA</p></div></article>
   </div>
 </section>
 
@@ -181,12 +188,12 @@
   <h2>Mini cheesecakes</h2>
   <p class="tagline">Beurrés, moelleux et toujours sortis du four</p>
   <div class="products">
-    <article class="product" data-id="cc-framboise" data-name="Cheesecake Framboise" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt="Framboise"><div><h3>Framboise</h3><p class="price">220 DA</p></div></article>
-    <article class="product" data-id="cc-noisettes" data-name="Cheesecake Noisettes" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt="Noisettes"><div><h3>Noisettes</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="cc-caramel-cacahuete" data-name="Cheesecake Caramel cacahuète" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt="Caramel cacahuète"><div><h3>Caramel cacahuète</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="cc-mangue" data-name="Cheesecake Mangue" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt="Mangue"><div><h3>Mangue</h3><p class="price">220 DA</p></div></article>
-    <article class="product" data-id="cc-fraise" data-name="Cheesecake Fraise" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt="Fraise"><div><h3>Fraise</h3><p class="price">220 DA</p></div></article>
-    <article class="product" data-id="cc-pistache" data-name="Cheesecake Pistache" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt="Pistache"><div><h3>Pistache</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="cc-framboise" data-name="Cheesecake Framboise" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Framboise</h3><p class="price">220 DA</p></div></article>
+    <article class="product" data-id="cc-noisettes" data-name="Cheesecake Noisettes" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Noisettes</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="cc-caramel-cacahuete" data-name="Cheesecake Caramel cacahuète" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Caramel cacahuète</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="cc-mangue" data-name="Cheesecake Mangue" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Mangue</h3><p class="price">220 DA</p></div></article>
+    <article class="product" data-id="cc-fraise" data-name="Cheesecake Fraise" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Fraise</h3><p class="price">220 DA</p></div></article>
+    <article class="product" data-id="cc-pistache" data-name="Cheesecake Pistache" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Pistache</h3><p class="price">250 DA</p></div></article>
   </div>
 </section>
 
@@ -195,9 +202,9 @@
   <h2>Pots de crème pâte à tartiner</h2>
   <p class="tagline">Des couches délicates, des garnitures généreuses et une finition dorée parfaite</p>
   <div class="products">
-    <article class="product" data-id="pot-pistache" data-name="Pot Pistache" data-price="600"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt="Pistache"><div><h3>Pistache</h3><p class="price">600 DA</p></div></article>
-    <article class="product" data-id="pot-fraise" data-name="Pot Fraise" data-price="550"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt="Fraise"><div><h3>Fraise</h3><p class="price">550 DA</p></div></article>
-    <article class="product" data-id="pot-noisette" data-name="Pot Noisette" data-price="650"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt="Noisette"><div><h3>Noisette</h3><p class="price">650 DA</p></div></article>
+    <article class="product" data-id="pot-pistache" data-name="Pot Pistache" data-price="600"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt=""><div><h3>Pistache</h3><p class="price">600 DA</p></div></article>
+    <article class="product" data-id="pot-fraise" data-name="Pot Fraise" data-price="550"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt=""><div><h3>Fraise</h3><p class="price">550 DA</p></div></article>
+    <article class="product" data-id="pot-noisette" data-name="Pot Noisette" data-price="650"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt=""><div><h3>Noisette</h3><p class="price">650 DA</p></div></article>
   </div>
 </section>
 
@@ -209,20 +216,20 @@
     <form class="order-form" id="orderForm" novalidate>
       <div class="seg" role="radiogroup" aria-label="Type de commande"><label><input type="radio" name="mode" value="À emporter" checked><span>À emporter</span></label><label><input type="radio" name="mode" value="Livraison"><span>Livraison</span></label></div>
       <label class="field" id="addressField" hidden><span>Adresse de livraison</span><input type="text" name="address" autocomplete="street-address" placeholder="Rue, ville"></label>
-      <label class="field"><span>Votre commande</span><textarea name="order" placeholder="Ex : 2 roulés mangue, 1 cheesecake pistache, pour demain 15h. Allergies, message sur la boîte..." required></textarea></label>
+      <label class="field"><span>Votre commande</span><textarea name="order" placeholder="Ex : 2 roulés mangue, 1 cheesecake pistache..." required></textarea></label>
       <p class="form-error" id="formError" role="alert"></p>
       <div class="send-row"><button class="send" type="button" data-who="Homme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Homme</span></button><button class="send" type="button" data-who="Femme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Femme</span></button></div>
     </form>
-    <p class="phone">Ou appelez-nous : <a href="tel:+213799351775">0799 35 17 75</a> / <a href="tel:+213556731849">0556 73 18 49</a></p>
+    <p class="phone">Ou appelez-nous : <a href="tel:+213556731849">0556 73 18 49</a></p>
   </div>
 </section>
 
 <!-- Pied de page -->
 <footer class="wrap footer">
-  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="Baguette et pains de campagne">
+  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="">
   <div class="footer-info">
     <div class="brand-block">
-      <strong class="name">Fresh Bakery</strong>
+      <img class="footer-logo" src="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png" alt="">
       <!-- Réseaux sociaux -->
       <div class="social">
         <a href="https://www.instagram.com/mesdelicesdallemagne/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
@@ -237,8 +244,8 @@
 <!-- Barre légale -->
 <nav class="legal" aria-label="Mentions légales">
   <div class="wrap">
-    <a href="#">Conditions générales</a>
-    <a href="#">Politique de confidentialité</a>
+    <span>Conditions générales</span>
+    <span>Politique de confidentialité</span>
   </div>
 </nav>
 
@@ -265,7 +272,7 @@
     errEl.textContent = err;
     if (err) return;
 
-    var msg = "Bonjour Fresh Bakery ! Je souhaite passer commande :\n\n" + order +
+    var msg = "Bonjour Mes délices d'Allemagne ! Je souhaite passer commande :\n\n" + order +
       "\n\nType : " + mode + (mode === "Livraison" ? "\nAdresse : " + address : "");
     var url = "https://wa.me/" + NUMBERS[who] + "?text=" + encodeURIComponent(msg);
     var w = window.open(url, "_blank");

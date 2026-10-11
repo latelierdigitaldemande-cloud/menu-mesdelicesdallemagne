@@ -115,6 +115,7 @@
   .form-error { min-height: 18px; margin-bottom: 6px; color: #b3261e; }
   .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border: 0; border-radius: 999px; background: #25d366; color: #06361a; font: inherit; font-size: 15px; font-weight: 800; box-shadow: 0 8px 20px rgba(37,211,102,.35); cursor: pointer; }
   .send svg { width: 22px; height: 22px; }
+  .send[data-who="Femme"] { order: -1; background: #8e5bd4; color: #fff; box-shadow: 0 8px 20px rgba(142,91,212,.35); }
   .order .phone a { text-decoration: underline; }
 
   /* Lignes produit, total, boutons WhatsApp */
@@ -207,18 +208,12 @@
     <p>Dites-nous ce que vous voulez, en quelle quantité et pour quand.</p>
     <form class="order-form" id="orderForm" novalidate>
       <div class="seg" role="radiogroup" aria-label="Type de commande"><label><input type="radio" name="mode" value="À emporter" checked><span>À emporter</span></label><label><input type="radio" name="mode" value="Livraison"><span>Livraison</span></label></div>
-      <div class="row2">
-        <label class="field"><span>Nom</span><input type="text" name="name" autocomplete="name" placeholder="Votre nom" required></label>
-        <label class="field"><span>Téléphone</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Numéro de téléphone" required></label>
-      </div>
       <label class="field" id="addressField" hidden><span>Adresse de livraison</span><input type="text" name="address" autocomplete="street-address" placeholder="Rue, ville"></label>
-      <div class="field"><span>Votre commande</span><div id="lines"></div><button class="add-line" type="button" id="addLine">+ Ajouter un produit</button></div>
-      <div class="total"><span>Total</span><span id="total">0 DA</span></div>
-      <label class="field"><span>Remarques (optionnel)</span><textarea name="notes" placeholder="Allergies, date et heure souhaitées, message sur la boîte..."></textarea></label>
+      <label class="field"><span>Votre commande</span><textarea name="order" placeholder="Ex : 2 roulés mangue, 1 cheesecake pistache, pour demain 15h. Allergies, message sur la boîte..." required></textarea></label>
       <p class="form-error" id="formError" role="alert"></p>
       <div class="send-row"><button class="send" type="button" data-who="Homme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Homme</span></button><button class="send" type="button" data-who="Femme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Femme</span></button></div>
     </form>
-    <p class="phone">Ou appelez-nous : <a href="tel:+11234567890">(123) 456 7890</a></p>
+    <p class="phone">Ou appelez-nous : <a href="tel:+213799351775">0799 35 17 75</a> / <a href="tel:+213556731849">0556 73 18 49</a></p>
   </div>
 </section>
 
@@ -230,13 +225,12 @@
       <strong class="name">Fresh Bakery</strong>
       <!-- Réseaux sociaux -->
       <div class="social">
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M13 20v-7h2.4l.4-3H13V8.3c0-.8.3-1.3 1.4-1.3H16V4.3c-.3 0-1.2-.1-2.2-.1C11.6 4.2 10 5.5 10 8v2H7.6v3H10v7z" fill="#fff"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://www.instagram.com/mesdelicesdallemagne/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://wa.me/213556731849" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       </div>
     </div>
-    <div><strong>Adresse</strong><p>123 Anywhere St. Any City, State, Any Country<br>(123) 456 7890</p></div>
-    <div><strong>Écrivez-nous</strong><p>freshbakery@reallygreatsite.com</p></div>
+    <div><strong>Adresse</strong><p>Bordj El Bahri, 16000 Alger<br>0799 35 17 75<br>0556 73 18 49</p></div>
+    <div><strong>Écrivez-nous</strong><p>mesdelicesdallemagne@gmail.com</p></div>
   </div>
 </footer>
 
@@ -255,86 +249,24 @@
   var form = document.getElementById("orderForm");
   var addressField = document.getElementById("addressField");
   var errEl = document.getElementById("formError");
-  var linesEl = document.getElementById("lines");
-  var totalEl = document.getElementById("total");
-
-  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " DA"; }
-
-  // Lecture des produits depuis la page
-  var products = {}, groups = [];
-  document.querySelectorAll(".menu").forEach(function (sec) {
-    var g = { cat: sec.querySelector("h2").textContent, items: [] };
-    sec.querySelectorAll(".product").forEach(function (p) {
-      var item = { id: p.dataset.id, name: p.dataset.name, price: +p.dataset.price };
-      products[item.id] = item; g.items.push(item);
-    });
-    groups.push(g);
-  });
-
-  var prodOptions = '<option value="">Choisir un produit</option>' + groups.map(function (g) {
-    return '<optgroup label="' + g.cat + '">' + g.items.map(function (i) {
-      return '<option value="' + i.id + '">' + i.name + " \u2014 " + fmt(i.price) + "</option>";
-    }).join("") + "</optgroup>";
-  }).join("");
-  var qtyOptions = "";
-  for (var q = 1; q <= 15; q++) qtyOptions += '<option value="' + q + '">' + q + "</option>";
-
-  function addLine() {
-    var d = document.createElement("div");
-    d.className = "line";
-    d.innerHTML = '<select class="prod" aria-label="Produit">' + prodOptions + '</select>' +
-      '<select class="qty" aria-label="Quantité">' + qtyOptions + '</select>' +
-      '<button class="rm" type="button" aria-label="Retirer">\u00d7</button>';
-    linesEl.appendChild(d);
-    refresh();
-  }
-
-  function refresh() {
-    var rows = linesEl.querySelectorAll(".line"), total = 0;
-    rows.forEach(function (r) {
-      r.querySelector(".rm").hidden = rows.length === 1;
-      var p = products[r.querySelector(".prod").value];
-      if (p) total += p.price * (+r.querySelector(".qty").value);
-    });
-    totalEl.textContent = fmt(total);
-  }
-
-  linesEl.addEventListener("change", function () { errEl.textContent = ""; refresh(); });
-  linesEl.addEventListener("click", function (e) {
-    if (e.target.classList.contains("rm")) { e.target.parentNode.remove(); refresh(); }
-  });
-  document.getElementById("addLine").addEventListener("click", addLine);
-  addLine();
 
   form.addEventListener("change", function (e) {
     if (e.target.name === "mode") { addressField.hidden = e.target.value === "À emporter"; errEl.textContent = ""; }
   });
+  form.addEventListener("input", function () { errEl.textContent = ""; });
 
   function send(who) {
     var f = form.elements;
-    var name = f.name.value.trim(), phone = f.phone.value.trim();
-    var digits = phone.replace(/\D/g, "");
-    var mode = f.mode.value, address = f.address.value.trim(), notes = f.notes.value.trim();
-
-    var items = [], total = 0;
-    linesEl.querySelectorAll(".line").forEach(function (r) {
-      var p = products[r.querySelector(".prod").value], qty = +r.querySelector(".qty").value;
-      if (p) { items.push("- " + qty + " x " + p.name + " (" + fmt(p.price * qty) + ")"); total += p.price * qty; }
-    });
+    var mode = f.mode.value, address = f.address.value.trim(), order = f.order.value.trim();
 
     var err = "";
-    if (!name) err = "Veuillez entrer votre nom.";
-    else if (digits.length < 8 || digits.length > 15) err = "Veuillez entrer un numéro de téléphone valide.";
+    if (!order) err = "Veuillez écrire votre commande.";
     else if (mode === "Livraison" && !address) err = "Veuillez entrer votre adresse de livraison.";
-    else if (!items.length) err = "Veuillez choisir au moins un produit.";
     errEl.textContent = err;
     if (err) return;
 
-    var msg = "Bonjour Fresh Bakery ! Je souhaite passer commande :\n\n" + items.join("\n") +
-      "\n\nTotal : " + fmt(total) + "\n\n" +
-      "Nom : " + name + "\nTéléphone : " + phone + "\nType : " + mode +
-      (mode === "Livraison" ? "\nAdresse : " + address : "") +
-      (notes ? "\nRemarques : " + notes : "");
+    var msg = "Bonjour Fresh Bakery ! Je souhaite passer commande :\n\n" + order +
+      "\n\nType : " + mode + (mode === "Livraison" ? "\nAdresse : " + address : "");
     var url = "https://wa.me/" + NUMBERS[who] + "?text=" + encodeURIComponent(msg);
     var w = window.open(url, "_blank");
     if (w) { w.opener = null; } else { window.location.href = url; }

@@ -4,14 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
-<title>Mes délices d'Allemagne</title>
-<meta name="description" content="Mes délices d'Allemagne : roulés au beurre fourrés, mini cheesecakes et pots de crème pâte à tartiner, préparés sur commande à Bordj El Bahri, Alger.">
-<meta name="application-name" content="Mes délices d'Allemagne">
-<meta property="og:site_name" content="Mes délices d'Allemagne">
-<meta property="og:title" content="Mes délices d'Allemagne">
-<meta property="og:description" content="Roulés, mini cheesecakes et pots de crème préparés sur commande à Alger.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png">
+<title>Accueil - Mes Delices d'Allemagne</title>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #1d1511; background: #fff; line-height: 1.5; }
@@ -29,10 +22,11 @@
   .topbar a { color: #1d1511; font-size: 14px; text-decoration: none; }
 
   /* Accueil */
-  .hero { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: 610px; color: #fff; overflow: hidden; }
+  .hero { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: 780px; color: #fff; overflow: hidden; }
   .hero > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(24,12,5,.5), transparent 62%); }
-  .topbar .logo { margin-right: auto; color: #1d1511; font-size: 22px; font-weight: 800; text-transform: uppercase; }
+  .topbar .logo { margin-right: auto; color: #1d1511; font-size: 22px; font-weight: 800; text-transform: uppercase; text-align: left; line-height: 1.1; }
+  .topbar .logo img { display: block; width: auto; height: 48px; }
   .hero-text { padding-bottom: 90px; }
   .hero h1 { font-size: 52px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
   .hero h1 span { display: block; font-weight: 400; }
@@ -48,7 +42,6 @@
 
   /* Produits */
   .menu { padding-top: 64px; }
-  #breads { scroll-margin-top: 60px; }
   .menu h2 { font-size: 50px; line-height: 1.05; letter-spacing: -0.03em; }
   .menu .tagline { margin-top: 10px; max-width: 34ch; color: #9c5a28; font-size: 30px; line-height: 1.35; }
   .products { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-top: 28px; }
@@ -56,8 +49,6 @@
 
   .product img { width: 100%; height: 100%; min-height: 190px; aspect-ratio: 4 / 3; object-fit: cover; }
   .product div { padding: 18px 0 18px 20px; }
-  .product { cursor: pointer; }
-  #order { scroll-margin-top: 60px; }
   .product h3 { font-size: 20px; line-height: 1.25; }
   .product p { font-size: 18px; }
 
@@ -75,12 +66,12 @@
   .footer-info p { font-size: 14px; color: #1d1511; }
   .social { display: flex; gap: 12px; margin-top: 28px; }
 
-  .footer .footer-logo { width: auto; height: 80px; max-width: none; margin: 0; object-fit: contain; object-position: left center; align-self: flex-start; }
   .brand-block { flex: 1 1 auto; }
   .footer-info > div:not(.brand-block) { flex: 0 0 auto; width: 240px; }
   .legal { background: #000; padding: 18px 0; }
   .legal .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; }
-  .legal span { color: #555; font-size: 13px; cursor: default; }
+  .legal a { color: #fff; font-size: 13px; text-decoration: none; }
+  .legal a:hover { text-decoration: underline; }
   .social a { display: block; width: 22px; height: 22px; color: #1d1511; }
   .social svg { display: block; width: 100%; height: 100%; }
 
@@ -95,118 +86,151 @@
     .footer-info > div:not(.brand-block) { width: auto; }
     .social { order: 1; margin-top: 0; }
     .wrap { width: calc(100% - 32px); }
-    .hero h1 { font-size: 60px; }  }
+    .hero h1 { font-size: 60px; }
+    .topbar .logo { font-size: 16px; }  }
 
-  /* Barre du haut */
+  /* Panier */
   .topbar .wrap { display: flex; justify-content: flex-end; align-items: center; gap: 20px; text-align: right; }
-  .topbar a.top-order { padding: 8px 18px; border: 1.5px solid #1d1511; border-radius: 999px; font-weight: 700; }
-  button, a, input, textarea { touch-action: manipulation; }
+  .cart-btn { position: relative; display: flex; padding: 4px; border: 0; background: none; color: #1d1511; cursor: pointer; }
+  .cart-btn svg { width: 24px; height: 24px; }
+  .cart-count { position: absolute; top: -4px; right: -6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #1d1511; color: #fff; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; }
+  .cart-count[hidden] { display: none; }
+  .cart-count.bump { animation: bump .3s; }
+  @keyframes bump { 50% { transform: scale(1.35); } }
+  button.button { background: none; font-family: inherit; cursor: pointer; }
+  .order .button + .button { margin-left: 10px; background: transparent; color: #fff; border-color: #fff; font-weight: 700; }
+  .product .add { display: block; margin-top: 12px; padding: 0; border: 0; background: none; color: #1d1511; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; }
+  .product .add:hover { text-decoration: underline; }
 
-  /* Formulaire de commande */
-  .order { padding: 90px 0; }
-  .order-form { max-width: 560px; margin: 32px auto 0; padding: 24px; border-radius: 22px; background: #fff; color: #1d1511; text-align: left; }
-  .order-form p { max-width: none; margin: 0; font-size: 13px; }
-  .field { display: block; margin-bottom: 12px; }
-  .field > span { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
-  .field input, .field textarea { display: block; width: 100%; padding: 11px 14px; border: 1.5px solid #d4d4d4; border-radius: 12px; background: #fff; color: #1d1511; font: inherit; font-size: 16px; transition: box-shadow .15s, border-color .15s; }
-  .field textarea { min-height: 110px; resize: vertical; }
-  .field input::placeholder, .field textarea::placeholder { color: #9a9a9a; }
-  .field input:focus, .field textarea:focus { outline: 0; border-color: #1d1511; box-shadow: 0 0 0 4px rgba(29,21,17,.12); }
+  .overlay { position: fixed; inset: 0; z-index: 20; background: rgba(20,12,8,.5); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .drawer { position: fixed; top: 50%; left: 50%; z-index: 21; display: flex; flex-direction: column; width: min(420px, 100% - 32px); height: min(612px, 83vh); overflow: hidden; border-radius: 22px; background: #fff; box-shadow: 0 24px 70px rgba(0,0,0,.28); opacity: 0; transform: translate(-50%, -46%) scale(.96); visibility: hidden; transition: opacity .22s, transform .22s cubic-bezier(.2,.8,.2,1), visibility .22s; }
+  .drawer.open { opacity: 1; transform: translate(-50%, -50%); visibility: visible; }
+  .drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 20px 22px 12px; }
+  .drawer-head h2 { font-size: 22px; letter-spacing: -0.03em; }
+  .drawer .close { display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #f2f0ee; color: #1d1511; font-size: 20px; line-height: 1; cursor: pointer; }
+  .drawer .close:hover { background: #e6e2de; }
+  .drawer-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 22px; overscroll-behavior: contain; }
+  .cart-empty { padding: 40px 0 48px; text-align: center; color: #6b6b6b; }
+  .cart-list { margin: 0; padding: 0; list-style: none; }
+  .cart-item { display: grid; grid-template-columns: 56px 1fr auto; gap: 0 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid #eee; }
+  .cart-item:last-child { border-bottom: 0; }
+  .cart-item .thumb { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; }
+  .cart-item .n { font-size: 15px; font-weight: 700; line-height: 1.25; }
+  .cart-item .p { margin-top: 2px; font-size: 13px; color: #6b6b6b; }
+  .cart-item .line-total { font-size: 15px; font-weight: 700; white-space: nowrap; }
+  .qty { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .stepper { display: inline-flex; align-items: center; border-radius: 999px; background: #f2f0ee; }
+  .stepper button { width: 30px; height: 30px; border: 0; border-radius: 50%; background: none; color: #1d1511; font-size: 16px; cursor: pointer; }
+  .stepper button:hover { background: #e6e2de; }
+  .stepper span { min-width: 22px; text-align: center; font-size: 14px; font-weight: 700; }
+  .qty .remove { border: 0; background: none; color: #8a8a8a; font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
+  .qty .remove:hover { color: #b3261e; }
+  .drawer-foot { flex: 0 0 auto; padding: 14px 22px 18px; border-top: 1px solid #eee; background: #fff; box-shadow: 0 -8px 16px rgba(0,0,0,.05); }
+  .drawer-foot[hidden] { display: none; }
+  .total { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; color: #6b6b6b; font-size: 15px; }
+  .total span:last-child { color: #1d1511; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .field { display: block; margin-bottom: 10px; }
+  @media (max-height: 700px) {
+    .drawer { height: 86vh; }
+    .drawer-head { padding: 12px 22px 6px; }
+    .drawer-foot { padding: 10px 22px 12px; }
+    .total { margin-bottom: 8px; }
+    .field input { padding-top: 10px; padding-bottom: 10px; }
+    .send { padding: 12px; }
+  }
+  .field > span:first-child { display: block; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+  .inp { position: relative; display: block; margin-top: 6px; }
+  .inp svg { position: absolute; top: 50%; left: 15px; width: 18px; height: 18px; transform: translateY(-50%); color: #1d1511; pointer-events: none; }
+  .field input { display: block; width: 100%; padding: 14px 16px 14px 44px; border: 1.5px solid #1d1511; border-radius: 14px; background: #fff; color: #1d1511; font: inherit; font-size: 16px; font-weight: 400; transition: box-shadow .15s; }
+  .field input::placeholder { color: #9a9a9a; }
+  .field input:focus { outline: 0; border-color: #1d1511; box-shadow: 0 0 0 4px rgba(29,21,17,.12); }
+  .form-error { min-height: 18px; margin-bottom: 6px; color: #b3261e; font-size: 13px; }
+  .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border: 0; border-radius: 999px; background: #25d366; color: #06361a; font: inherit; font-size: 15px; font-weight: 800; box-shadow: 0 8px 20px rgba(37,211,102,.35); cursor: pointer; transition: transform .15s, box-shadow .15s; }
+  .send svg { width: 22px; height: 22px; }
+  .send:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(37,211,102,.4); }
+  /* Formulaire compact + mode de commande */
+  .drawer-foot { padding: 10px 22px 12px; }
+  .total { margin-bottom: 6px; }
+  .field { margin-bottom: 6px; }
   .field[hidden] { display: none; }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .row2 .field { min-width: 0; }
-  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 14px; padding: 3px; border-radius: 999px; background: #f2f0ee; }
+  .field > span:first-child { font-size: 10.5px; line-height: 1.2; }
+  .inp { margin-top: 5px; }
+  .inp svg { left: 11px; width: 15px; height: 15px; }
+  .field input { border-color: #d4d4d4; padding: 6px 12px 6px 36px; border-radius: 10px; font-size: 16px; }
+  .field.plain input { padding-left: 12px; }
+  .form-error { min-height: 16px; margin-bottom: 4px; font-size: 12px; }
+  .send { padding: 10px; font-size: 14px; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; padding: 3px; border-radius: 999px; background: #f2f0ee; }
   .seg label { position: relative; }
   .seg input { position: absolute; opacity: 0; pointer-events: none; }
-  .seg span { display: block; padding: 9px 6px; border-radius: 999px; text-align: center; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .seg span { display: block; padding: 6px 6px; border-radius: 999px; text-align: center; font-size: 13px; font-weight: 700; cursor: pointer; }
   .seg input:checked + span { background: #1d1511; color: #fff; }
   .seg input:focus-visible + span { outline: 2px solid #1d1511; outline-offset: 2px; }
-  .form-error { min-height: 18px; margin-bottom: 6px; color: #b3261e; }
-  .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border: 0; border-radius: 999px; background: #25d366; color: #06361a; font: inherit; font-size: 15px; font-weight: 800; box-shadow: 0 8px 20px rgba(37,211,102,.35); cursor: pointer; }
-  .send svg { width: 22px; height: 22px; }
-  .send[data-who="Femme"] { order: -1; background: #8e5bd4; color: #fff; box-shadow: 0 8px 20px rgba(142,91,212,.35); }
-  .order .phone a { text-decoration: none; }
-
-  /* Lignes produit, total, boutons WhatsApp */
-  .line { display: grid; grid-template-columns: 1fr 84px 36px; gap: 8px; align-items: center; margin-bottom: 10px; }
-  .line select { width: 100%; padding: 11px 12px; border: 1.5px solid #d4d4d4; border-radius: 12px; background: #fff; color: #1d1511; font: inherit; font-size: 16px; }
-  .line select:focus { outline: 0; border-color: #1d1511; box-shadow: 0 0 0 4px rgba(29,21,17,.12); }
-  .line .rm { width: 36px; height: 36px; border: 0; border-radius: 50%; background: #f2f0ee; color: #1d1511; font-size: 18px; line-height: 1; cursor: pointer; }
-  .line .rm[hidden] { display: none; }
-  .add-line { margin-bottom: 14px; padding: 9px 16px; border: 1.5px dashed #1d1511; border-radius: 999px; background: none; color: #1d1511; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
-  .total { display: flex; justify-content: space-between; margin-bottom: 14px; padding: 12px 0; border-top: 1px solid #e5e1dd; font-size: 16px; font-weight: 800; }
-  .send-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  @media (max-width: 520px) { .send-row { grid-template-columns: 1fr; } }
-  .topbar .logo img { height: 64px; width: auto; max-width: none; object-position: left center; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row2 .field { min-width: 0; }
+  body.lock { overflow: hidden; }
 </style>
 </head>
 <body id="top">
 
 <header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Mes délices d'Allemagne"><img src="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png" alt=""></a>
+    <a class="logo" href="#top" aria-label="Mes Delices d'Allemagne"><img src="https://i.ibb.co/93W9C0dx/IMG-0028.jpg" alt=""></a>
     <a href="#top">Home</a>
-    
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Ouvrir le panier" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.1 10.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.1"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/></svg>
+      <span class="cart-count" id="cartCount" hidden>0</span>
+    </button>
   </div>
 </header>
 
 <!-- Accueil -->
 <section class="hero">
-  <img src="https://i.ibb.co/Cp4JCN2y/Image-Chat-GPT-28-sept-2026-a-16-56-52-png.webp" alt="">
+  <img src="https://i.ibb.co/Cp4JCN2y/Image-Chat-GPT-28-sept-2026-a-16-56-52-png.webp" alt="Viennoiseries dorées sur un plateau en bois">
   <div class="wrap hero-text">
-    <h1>Frais du four.<span>En ligne. À l'heure.</span></h1>
+    <h1>Douceurs allemandes.<span>Préparées avec soin.</span></h1>
     <hr>
-    <a class="button" href="#breads">Commandez aujourd'hui</a>
+    <a class="button" href="#breads">Commander</a>
   </div>
 </section>
 
 <!-- Bienvenue -->
 <section class="wrap welcome">
-  <h2>Bienvenue dans notre boutique en ligne !</h2>
-  <p>Chaque patisseries et viennoiserie est préparé sur commande et arrive juste quand vous en avez besoin.</p>
-  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="">
+  <h2>Le goût de l'artisanat, chez vous !</h2>
+  <p>Mini cheesecakes allemands et roulés au beurre, préparés sur commande ou en vente flash, et livrés quand vous en avez envie.</p>
+  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="Roulés au beurre dorés">
 </section>
 
-<!-- Pains -->
+<!-- Roulés au beurre -->
 <section class="wrap menu" id="breads">
-  <h2>Roulés au beurre fourrés</h2>
-  <p class="tagline">Dorés à l’extérieur, moelleux à cœur et généreusement fourrés.</p>
+  <h2>Roulés au beurre</h2>
+  <p class="tagline">Moelleux, généreux et frais du jour</p>
   <div class="products">
-    <article class="product" data-id="cacahuetes" data-name="Roulé Cacahuètes" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Cacahuètes</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="caramel" data-name="Roulé Caramel" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Caramel</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="mangue" data-name="Roulé Mangue" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt=""><div><h3>Mangue</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="pistache" data-name="Roulé Pistache" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Pistache</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="framboise" data-name="Roulé Framboise" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt=""><div><h3>Framboise</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="fraise" data-name="Roulé Fraise" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Fraise</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="chocolat" data-name="Roulé Chocolat" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Chocolat</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="cannelle" data-name="Roulé Cannelle" data-price="200"><img src="https://i.ibb.co/27fmKzRq/Roul-brioch-mangue-et-gla-age-cr-meux.png" alt=""><div><h3>Cannelle</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="mure" data-name="Roulé Mûre" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Mûre</h3><p class="price">200 DA</p></div></article>
-    <article class="product" data-id="noisette" data-name="Roulé Noisette" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt=""><div><h3>Noisette</h3><p class="price">250 DA</p></div></article>
+    <article class="product" data-id="roule-cacahuètes-caramel" data-name="Roulé Cacahuètes Caramel" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Cacahuètes Caramel"><div><h3>Cacahuètes Caramel</h3><p class="price">250 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Cacahuètes Caramel au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-mangue" data-name="Roulé Mangue" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Mangue"><div><h3>Mangue</h3><p class="price">200 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Mangue au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-pistache" data-name="Roulé Pistache" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Pistache"><div><h3>Pistache</h3><p class="price">250 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Pistache au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-framboise" data-name="Roulé Framboise" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Framboise"><div><h3>Framboise</h3><p class="price">200 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Framboise au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-fraise" data-name="Roulé Fraise" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Fraise"><div><h3>Fraise</h3><p class="price">200 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Fraise au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-chocolat" data-name="Roulé Chocolat" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Chocolat"><div><h3>Chocolat</h3><p class="price">200 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Chocolat au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-cannelle" data-name="Roulé Cannelle" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Cannelle"><div><h3>Cannelle</h3><p class="price">200 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Cannelle au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-mure" data-name="Roulé Mûre" data-price="200"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Mûre"><div><h3>Mûre</h3><p class="price">200 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Mûre au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="roule-noisette" data-name="Roulé Noisette" data-price="250"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Roulé Noisette"><div><h3>Noisette</h3><p class="price">250 DA</p><button class="add" type="button" aria-label="Ajouter Roulé Noisette au panier">Ajouter +</button></div></article>
   </div>
 </section>
 
-<!-- Cookies -->
+<!-- Mini cheesecakes -->
 <section class="wrap menu">
-  <h2>Mini cheesecakes</h2>
-  <p class="tagline">Une base fondante, une crème onctueuse et un cœur fruité.</p>
+  <h2>Mini cheesecakes allemands</h2>
+  <p class="tagline">Crémeux, gourmands et faits maison</p>
   <div class="products">
-    <article class="product" data-id="cc-framboise" data-name="Cheesecake Framboise" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Framboise</h3><p class="price">220 DA</p></div></article>
-    <article class="product" data-id="cc-noisettes" data-name="Cheesecake Noisettes" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Noisettes</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="cc-caramel-cacahuete" data-name="Cheesecake Caramel cacahuète" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Caramel cacahuète</h3><p class="price">250 DA</p></div></article>
-    <article class="product" data-id="cc-mangue" data-name="Cheesecake Mangue" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Mangue</h3><p class="price">220 DA</p></div></article>
-    <article class="product" data-id="cc-fraise" data-name="Cheesecake Fraise" data-price="220"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Fraise</h3><p class="price">220 DA</p></div></article>
-    <article class="product" data-id="cc-pistache" data-name="Cheesecake Pistache" data-price="250"><img src="https://i.ibb.co/YBtPMGb9/Mini-cheesecake-aux-fraises-gourmande.png" alt=""><div><h3>Pistache</h3><p class="price">250 DA</p></div></article>
-  </div>
-</section>
-
-<!-- Viennoiseries -->
-<section class="wrap menu">
-  <h2>Pâte à tartiner</h2>
-  <p class="tagline">Une couches onctueuses de gourmandise à chaque cuillère.</p>
-  <div class="products">
-    <article class="product" data-id="pot-pistache" data-name="Pot Pistache" data-price="600"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt=""><div><h3>Pistache</h3><p class="price">600 DA</p></div></article>
-    <article class="product" data-id="pot-fraise" data-name="Pot Fraise" data-price="550"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt=""><div><h3>Fraise</h3><p class="price">550 DA</p></div></article>
-    <article class="product" data-id="pot-noisette" data-name="Pot Noisette" data-price="650"><img src="https://i.ibb.co/hJH9B71G/Pot-de-cr-me-de-pistache-gourmand.png" alt=""><div><h3>Noisette</h3><p class="price">650 DA</p></div></article>
+    <article class="product" data-id="cheesecake-fraise" data-name="Cheesecake Fraise" data-price="230"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Fraise"><div><h3>Fraise</h3><p class="price">230 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Fraise au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="cheesecake-mangue" data-name="Cheesecake Mangue" data-price="230"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Mangue"><div><h3>Mangue</h3><p class="price">230 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Mangue au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="cheesecake-noisette" data-name="Cheesecake Noisette" data-price="270"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Noisette"><div><h3>Noisette</h3><p class="price">270 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Noisette au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="cheesecake-cacahuètes-caramel" data-name="Cheesecake Cacahuètes Caramel" data-price="270"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Cacahuètes Caramel"><div><h3>Cacahuètes Caramel</h3><p class="price">270 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Cacahuètes Caramel au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="cheesecake-mure" data-name="Cheesecake Mûre" data-price="230"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Mûre"><div><h3>Mûre</h3><p class="price">230 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Mûre au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="cheesecake-framboise" data-name="Cheesecake Framboise" data-price="230"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Framboise"><div><h3>Framboise</h3><p class="price">230 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Framboise au panier">Ajouter +</button></div></article>
+    <article class="product" data-id="cheesecake-pistache" data-name="Cheesecake Pistache" data-price="270"><img src="https://i.ibb.co/Kcq8VFdK/Roul-la-cannelle-glac-aux-noisettes.png" alt="Cheesecake Pistache"><div><h3>Pistache</h3><p class="price">270 DA</p><button class="add" type="button" aria-label="Ajouter Cheesecake Pistache au panier">Ajouter +</button></div></article>
   </div>
 </section>
 
@@ -214,89 +238,199 @@
 <section class="order" id="order">
   <div class="wrap">
     <h2>Prêt à commander ?</h2>
-    <p>Dites-nous ce que vous voulez, en quelle quantité et pour quand.</p>
-    <form class="order-form" id="orderForm" novalidate>
-      <div class="seg" role="radiogroup" aria-label="Type de commande"><label><input type="radio" name="mode" value="Livraison" checked><span>Livraison</span></label><label><input type="radio" name="mode" value="À emporter"><span>À emporter</span></label></div>
-      <label class="field" id="addressField"><span>Adresse de livraison</span><input type="text" name="address" autocomplete="street-address" placeholder="Rue, ville"></label>
-      <label class="field"><span>Votre commande</span><textarea name="order" placeholder="Ex : 2 roulés mangue, 1 cheesecake pistache..." required></textarea></label>
-      <p class="form-error" id="formError" role="alert"></p>
-      <div class="send-row"><button class="send" type="button" data-who="Homme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Homme</span></button><button class="send" type="button" data-who="Femme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp Femme</span></button></div>
-    </form>
-    <p class="phone">Ou appelez-nous : <a href="tel:+213556731849">0556 73 18 49</a></p>
+    <p>Choisissez vos parfums, indiquez la quantité et le moment souhaité. Nous nous occupons du reste !</p>
+    <a class="button" href="tel:+213549183322">Nous appeler</a>
+    <p class="phone">+213 549 18 33 22</p>
   </div>
 </section>
 
 <!-- Pied de page -->
 <footer class="wrap footer">
-  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="">
+  <img src="https://i.ibb.co/VYWVDWwB/Image-Chat-GPT-28-sept-2026-a-12-46-08-png.webp" alt="Roulés au beurre et mini cheesecakes">
   <div class="footer-info">
     <div class="brand-block">
-      <img class="footer-logo" src="https://i.ibb.co/vvskBMN6/Capture-d-cran-2026-10-11-14-42-37.png" alt="">
+      <strong class="name">Mes Delices d'Allemagne</strong>
       <!-- Réseaux sociaux -->
       <div class="social">
-        <a href="https://www.instagram.com/mesdelicesdallemagne/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://wa.me/213556731849" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://www.instagram.com/mesdelicesdallemagne?rpxt=dWE1bHdyNnpxdWJr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://wa.me/213549183322" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       </div>
     </div>
-    <div><strong>Adresse</strong><p>Bordj El Bahri, 16000 Alger<br>0799 35 17 75<br>0556 73 18 49</p></div>
-    <div><strong>Écrivez-nous</strong><p>mesdelicesdallemagne@gmail.com</p></div>
+    <div><strong>Adresse</strong><p>Bordj El Bahri, Algérie<br>+213 549 18 33 22</p></div>
+    <div><strong>Écrivez-nous</strong><p>contact@mesdelicesdallemagne.com</p></div>
   </div>
 </footer>
 
 <!-- Barre légale -->
 <nav class="legal" aria-label="Mentions légales">
   <div class="wrap">
-    <span>Conditions générales</span>
-    <span>Politique de confidentialité</span>
+    <a href="#">Conditions générales</a>
+    <a href="#">Politique de confidentialité</a>
   </div>
 </nav>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <div class="drawer-head">
+    <h2 id="drawerTitle">Votre panier</h2>
+    <button class="close" id="closeCart" type="button" aria-label="Fermer le panier">&times;</button>
+  </div>
+  <div class="drawer-body">
+    <p class="cart-empty" id="cartEmpty">Votre panier est vide. Ajoutez une gourmandise du menu !</p>
+    <ul class="cart-list" id="cartList"></ul>
+  </div>
+  <form class="drawer-foot" id="orderForm" novalidate hidden>
+    <div class="total"><span>Total</span><span id="cartTotal">0 DA</span></div>
+    <div class="seg" role="radiogroup" aria-label="Type de commande"><label><input type="radio" name="mode" value="A emporter" checked><span>À emporter</span></label><label><input type="radio" name="mode" value="Livraison"><span>Livraison</span></label></div>
+    <div class="row2">
+    <label class="field"><span>Nom</span><span class="inp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><input type="text" name="name" autocomplete="name" placeholder="Nom" required></span></label>
+    <label class="field"><span>Téléphone</span><span class="inp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Téléphone" required></span></label>
+    </div>
+    <label class="field plain" id="addressField" hidden><span>Adresse de livraison</span><span class="inp"><input type="text" name="address" autocomplete="street-address" placeholder="Rue, ville"></span></label>
+    <p class="form-error" id="formError" role="alert"></p>
+    <button class="send" type="submit"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>Envoyer sur WhatsApp</span></button>
+  </form>
+</aside>
 
 <script>
 (function () {
   "use strict";
-  var NUMBERS = { Homme: "213799351775", Femme: "213556731849" };
-  var form = document.getElementById("orderForm");
-  var addressField = document.getElementById("addressField");
-  var errEl = document.getElementById("formError");
 
-  form.addEventListener("change", function (e) {
-    if (e.target.name === "mode") { addressField.hidden = e.target.value === "À emporter"; errEl.textContent = ""; }
+  var WHATSAPP_NUMBER = "213549183322";
+  var STORE_KEY = "freshbakery-cart-v1";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var drawer = $("drawer"), overlay = $("overlay"), list = $("cartList"), emptyMsg = $("cartEmpty");
+  var form = $("orderForm"), badge = $("cartCount"), totalEl = $("cartTotal"), errEl = $("formError");
+  var cartBtn = $("cartBtn"), lastFocus = null;
+
+  var catalog = {};
+  document.querySelectorAll(".product[data-id]").forEach(function (el) {
+    catalog[el.dataset.id] = { name: el.dataset.name, price: Number(el.dataset.price), img: (el.querySelector("img") || {}).src || "" };
   });
-  form.addEventListener("input", function () { errEl.textContent = ""; });
 
-  function send(who) {
+  var cart = {};
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+    Object.keys(saved).forEach(function (id) {
+      var q = parseInt(saved[id], 10);
+      if (catalog[id] && q > 0) cart[id] = Math.min(q, 20);
+    });
+  } catch (e) { cart = {}; }
+
+  function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " DA"; }
+  function mk(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function stepBtn(label, aria, cls, fn) {
+    var b = mk("button", cls, label);
+    b.type = "button"; b.setAttribute("aria-label", aria);
+    b.addEventListener("click", fn);
+    return b;
+  }
+
+  function render() {
+    var ids = Object.keys(cart), count = 0, total = 0;
+    list.textContent = "";
+    ids.forEach(function (id) {
+      var item = catalog[id], q = cart[id];
+      count += q; total += item.price * q;
+      var li = mk("li", "cart-item");
+      var thumb = mk("img", "thumb"); thumb.src = item.img; thumb.alt = "";
+      var info = mk("div");
+      var stepper = mk("div", "stepper");
+      stepper.append(
+        stepBtn("−", "Retirer un " + item.name, "", function () { change(id, -1); }),
+        mk("span", "", String(q)),
+        stepBtn("+", "Ajouter un " + item.name, "", function () { change(id, 1); })
+      );
+      var qty = mk("div", "qty");
+      qty.append(stepper, stepBtn("Supprimer", "Supprimer " + item.name + " du panier", "remove", function () { delete cart[id]; update(); }));
+      info.append(mk("div", "n", item.name), mk("div", "p", money(item.price) + " l'unité"), qty);
+      li.append(thumb, info, mk("div", "line-total", money(item.price * q)));
+      list.append(li);
+    });
+    emptyMsg.hidden = ids.length > 0;
+    form.hidden = ids.length === 0;
+    totalEl.textContent = money(total);
+    badge.textContent = count;
+    badge.hidden = count === 0;
+  }
+  function update() { try { localStorage.setItem(STORE_KEY, JSON.stringify(cart)); } catch (e) {} render(); }
+  function change(id, d) {
+    var q = (cart[id] || 0) + d;
+    if (q <= 0) delete cart[id]; else cart[id] = Math.min(q, 20);
+    update();
+  }
+
+  function openCart() {
+    lastFocus = document.activeElement;
+    drawer.classList.add("open"); overlay.classList.add("open");
+    drawer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lock");
+    $("closeCart").focus();
+  }
+  function closeCart() {
+    drawer.classList.remove("open"); overlay.classList.remove("open");
+    drawer.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lock");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  cartBtn.addEventListener("click", openCart);
+  $("closeCart").addEventListener("click", closeCart);
+  overlay.addEventListener("click", closeCart);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeCart(); });
+  document.querySelectorAll("[data-open-cart]").forEach(function (b) { b.addEventListener("click", openCart); });
+
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".add");
+    if (!btn) return;
+    var id = btn.closest(".product").dataset.id;
+    cart[id] = Math.min((cart[id] || 0) + 1, 20);
+    update();
+    badge.classList.remove("bump"); void badge.offsetWidth; badge.classList.add("bump");
+    btn.classList.add("done"); btn.textContent = "Ajouté \u2713";
+    setTimeout(function () { btn.classList.remove("done"); btn.textContent = "Ajouter +"; }, 900);
+  });
+
+  var addressField = $("addressField");
+  form.addEventListener("change", function (e) {
+    if (e.target.name === "mode") { addressField.hidden = e.target.value === "A emporter"; errEl.textContent = ""; }
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
     var f = form.elements;
-    var mode = f.mode.value, address = f.address.value.trim(), order = f.order.value.trim();
-
+    var name = f.name.value.trim(), phone = f.phone.value.trim();
+    var digits = phone.replace(/\D/g, "");
+    var mode = f.mode.value, address = f.address.value.trim();
     var err = "";
-    if (!order) err = "Veuillez écrire votre commande.";
+    if (!Object.keys(cart).length) err = "Votre panier est vide.";
+    else if (!name) err = "Veuillez entrer votre nom.";
+    else if (digits.length < 8 || digits.length > 15) err = "Veuillez entrer un numéro de téléphone valide.";
     else if (mode === "Livraison" && !address) err = "Veuillez entrer votre adresse de livraison.";
     errEl.textContent = err;
     if (err) return;
 
-    var msg = "Bonjour Mes délices d'Allemagne ! Je souhaite passer commande :\n\n" + order +
-      "\n\nType : " + mode + (mode === "Livraison" ? "\nAdresse : " + address : "");
-    var url = "https://wa.me/" + NUMBERS[who] + "?text=" + encodeURIComponent(msg);
+    var lines = [], total = 0;
+    Object.keys(cart).forEach(function (id) {
+      var item = catalog[id], q = cart[id];
+      total += item.price * q;
+      lines.push("- " + q + " x " + item.name + " : " + money(item.price * q));
+    });
+    var msg = "Bonjour Mes Delices d'Allemagne ! Je souhaite passer commande :\n\n" +
+      lines.join("\n") + "\n\nTotal : " + money(total) + "\n\n" +
+      "Nom : " + name + "\nTéléphone : " + phone + "\nType : " + mode +
+      (mode === "Livraison" ? "\nAdresse : " + address : "");
+    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
     var w = window.open(url, "_blank");
     if (w) { w.opener = null; } else { window.location.href = url; }
-  }
-
-  form.addEventListener("submit", function (e) { e.preventDefault(); });
-
-  // Chaque carte produit renvoie vers le formulaire
-  var orderSection = document.getElementById("order");
-  function goToOrder() { orderSection.scrollIntoView({ behavior: "smooth", block: "start" }); }
-  document.querySelectorAll(".product").forEach(function (card) {
-    card.setAttribute("role", "link");
-    card.setAttribute("tabindex", "0");
-    card.addEventListener("click", goToOrder);
-    card.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goToOrder(); }
-    });
   });
-  document.querySelectorAll(".send").forEach(function (b) {
-    b.addEventListener("click", function () { send(b.dataset.who); });
-  });
+
+  render();
 })();
 </script>
 </body>

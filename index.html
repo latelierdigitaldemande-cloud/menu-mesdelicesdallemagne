@@ -6,7 +6,7 @@
 <meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
 <title>Accueil - Mes Delices d'Allemagne</title>
 <style>
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; touch-action: manipulation; }
   body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #1d1511; background: #fff; line-height: 1.5; }
   img { display: block; max-width: 100%; }
   h1, h2, h3, p { margin: 0; }
@@ -26,7 +26,7 @@
   .hero > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(24,12,5,.5), transparent 62%); }
   .topbar .logo { margin-right: auto; color: #1d1511; font-size: 22px; font-weight: 800; text-transform: uppercase; text-align: left; line-height: 1.1; }
-  .topbar .logo img { display: block; width: auto; height: 48px; }
+  .topbar .logo img { display: block; width: auto; height: 60px; }
   .hero-text { padding-bottom: 90px; }
   .hero h1 { font-size: 52px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
   .hero h1 span { display: block; font-weight: 400; }
@@ -170,6 +170,8 @@
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .row2 .field { min-width: 0; }
   body.lock { overflow: hidden; }
+  .stepper[hidden], .product .add[hidden] { display: none; }
+  .product .stepper { margin-top: 12px; padding: 0; }
 </style>
 </head>
 <body id="top">
@@ -191,7 +193,7 @@
   <div class="wrap hero-text">
     <h1>Douceurs allemandes.<span>Préparées avec soin.</span></h1>
     <hr>
-    <a class="button" href="#breads">Commander</a>
+    <a class="button" href="#breads">Commander maintenant</a>
   </div>
 </section>
 
@@ -358,6 +360,7 @@
     totalEl.textContent = money(total);
     badge.textContent = count;
     badge.hidden = count === 0;
+    syncCards();
   }
   function update() { try { localStorage.setItem(STORE_KEY, JSON.stringify(cart)); } catch (e) {} render(); }
   function change(id, d) {
@@ -392,8 +395,6 @@
     cart[id] = Math.min((cart[id] || 0) + 1, 20);
     update();
     badge.classList.remove("bump"); void badge.offsetWidth; badge.classList.add("bump");
-    btn.classList.add("done"); btn.textContent = "Ajouté \u2713";
-    setTimeout(function () { btn.classList.remove("done"); btn.textContent = "Ajouter +"; }, 900);
   });
 
   var addressField = $("addressField");
@@ -428,6 +429,28 @@
     var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
     var w = window.open(url, "_blank");
     if (w) { w.opener = null; } else { window.location.href = url; }
+  });
+
+  function syncCards() {
+    document.querySelectorAll(".product[data-id]").forEach(function (el) {
+      var id = el.dataset.id, q = cart[id] || 0;
+      var add = el.querySelector(".add"), st = el.querySelector(".card-stepper");
+      if (!add || !st) return;
+      add.hidden = q > 0;
+      st.hidden = q === 0;
+      st.querySelector("span").textContent = q;
+    });
+  }
+  document.querySelectorAll(".product[data-id]").forEach(function (el) {
+    var id = el.dataset.id, name = catalog[id].name;
+    var st = mk("div", "stepper card-stepper");
+    st.hidden = true;
+    st.append(
+      stepBtn("\u2212", "Retirer un " + name, "", function () { change(id, -1); }),
+      mk("span", "", "0"),
+      stepBtn("+", "Ajouter un " + name, "", function () { change(id, 1); })
+    );
+    el.querySelector("div").append(st);
   });
 
   render();

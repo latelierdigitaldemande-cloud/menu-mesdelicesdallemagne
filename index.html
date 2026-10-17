@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
-<title>Accueil - Mes Delices d'Allemagne</title>
+<title>Mes Delices d'Allemagne - Mini cheesecakes et roulés au beurre</title>
 <style>
   * { box-sizing: border-box; touch-action: manipulation; }
   body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #1d1511; background: #fff; line-height: 1.5; }
@@ -16,7 +16,7 @@
   .wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
 
   /* Barre fixe en haut (au-dessus de la photo, pas dedans) */
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 40px; }
   .topbar { position: sticky; top: 0; z-index: 10; background: #fff; }
   .topbar .wrap { padding: 16px 0; text-align: right; }
   .topbar a { color: #1d1511; font-size: 14px; text-decoration: none; }
@@ -193,7 +193,7 @@
   <div class="wrap hero-text">
     <h1>Douceurs allemandes.<span>Préparées avec soin.</span></h1>
     <hr>
-    <a class="button" href="#breads">Commander maintenant</a>
+    <a class="button" href="#roules">Commander maintenant</a>
   </div>
 </section>
 
@@ -205,7 +205,7 @@
 </section>
 
 <!-- Roulés au beurre -->
-<section class="wrap menu" id="breads">
+<section class="wrap menu" id="roules">
   <h2>Roulés au beurre</h2>
   <p class="tagline">Moelleux, généreux et frais du jour</p>
   <div class="products">
@@ -222,7 +222,7 @@
 </section>
 
 <!-- Mini cheesecakes -->
-<section class="wrap menu">
+<section class="wrap menu" id="cheesecakes">
   <h2>Mini cheesecakes allemands</h2>
   <p class="tagline">Crémeux, gourmands et faits maison</p>
   <div class="products">
@@ -299,7 +299,7 @@
   "use strict";
 
   var WHATSAPP_NUMBER = "213549183322";
-  var STORE_KEY = "freshbakery-cart-v1";
+  var STORE_KEY = "mesdelices-cart-v1";
 
   var $ = function (id) { return document.getElementById(id); };
   var drawer = $("drawer"), overlay = $("overlay"), list = $("cartList"), emptyMsg = $("cartEmpty");

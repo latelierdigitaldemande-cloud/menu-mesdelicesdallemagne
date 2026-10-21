@@ -80,8 +80,7 @@
   .footer-info > div:not(.brand-block) { flex: 0 0 auto; width: 240px; }
   .legal { background: #000; padding: 18px 0; }
   .legal .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; }
-  .legal a { color: #fff; font-size: 13px; text-decoration: none; }
-  .legal a:hover { text-decoration: underline; }
+  .legal span { color: #555; font-size: 13px; cursor: default; user-select: none; }
   .social a { display: block; width: 22px; height: 22px; color: #1d1511; }
   .social svg { display: block; width: 100%; height: 100%; }
 
@@ -182,6 +181,9 @@
   body.lock { overflow: hidden; }
   .stepper[hidden], .product .add[hidden] { display: none; }
   .product .stepper { margin-top: 12px; padding: 0; }
+  .soldtag { margin-top: 12px; font-size: 15px; font-weight: 700; color: #9c3a2e; }
+  .soldtag[hidden] { display: none; }
+  .product.soldout img { opacity: .4; }
 </style>
 </head>
 <body id="top">
@@ -276,8 +278,8 @@
 <!-- Barre légale -->
 <nav class="legal" aria-label="Mentions légales">
   <div class="wrap">
-    <a href="#">Conditions générales</a>
-    <a href="#">Politique de confidentialité</a>
+    <span>Conditions générales</span>
+    <span>Politique de confidentialité</span>
   </div>
 </nav>
 
@@ -310,6 +312,8 @@
 
   var WHATSAPP_NUMBER = "213799351775";
   var STORE_KEY = "mesdelices-cart-v1";
+  // Lien du Google Sheet publié en CSV (prix et stock). Vide = on garde les prix du code.
+  var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjIDhS-ODyCQRPTYUx62JSsC7wgAvizR1A_kitU5mqYbzcdAcdE-HpTFyDmVJ4ZKYI7IzrEaXv2IPl/pub?gid=981849328&single=true&output=tsv";
 
   var $ = function (id) { return document.getElementById(id); };
   var drawer = $("drawer"), overlay = $("overlay"), list = $("cartList"), emptyMsg = $("cartEmpty");
@@ -446,8 +450,12 @@
       var id = el.dataset.id, q = cart[id] || 0;
       var add = el.querySelector(".add"), st = el.querySelector(".card-stepper");
       if (!add || !st) return;
-      add.hidden = q > 0;
-      st.hidden = q === 0;
+      var out = !!catalog[id].out, tag = el.querySelector(".soldtag");
+      if (out && !tag) { tag = mk("p", "soldtag", "Épuisé"); el.querySelector("div").append(tag); }
+      if (tag) tag.hidden = !out;
+      el.classList.toggle("soldout", out);
+      add.hidden = out || q > 0;
+      st.hidden = out || q === 0;
       st.querySelector("span").textContent = q;
     });
   }
@@ -462,6 +470,44 @@
     );
     el.querySelector("div").append(st);
   });
+
+  function parseCsv(t) {
+    var rows = [], row = [], cur = "", q = false;
+    var sep = t.split(/\r?\n/)[0].indexOf("\t") > -1 ? "\t" : ",";
+    for (var i = 0; i < t.length; i++) {
+      var c = t[i];
+      if (q) { if (c === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+      else if (c === '"') q = true;
+      else if (c === sep) { row.push(cur); cur = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; row.push(cur); rows.push(row); row = []; cur = ""; }
+      else cur += c;
+    }
+    if (cur || row.length) { row.push(cur); rows.push(row); }
+    return rows;
+  }
+  function applySheet(text) {
+    var rows = parseCsv(text).filter(function (r) { return r.join("").trim(); });
+    if (rows.length < 2) return;
+    var head = rows.shift().map(function (h) { return h.trim().toLowerCase().replace(/[éè]/g, "e"); });
+    var iId = head.indexOf("id"), iPrix = head.indexOf("prix"), iDispo = head.indexOf("disponible");
+    if (iId < 0) return;
+    rows.forEach(function (r) {
+      var id = (r[iId] || "").trim(), item = catalog[id];
+      if (!item) return;
+      var el = document.querySelector('.product[data-id="' + id + '"]');
+      var p = iPrix >= 0 ? parseInt(String(r[iPrix] || "").replace(/\D/g, ""), 10) : 0;
+      if (p > 0) { item.price = p; el.dataset.price = p; el.querySelector(".price").textContent = money(p); }
+      if (iDispo >= 0) {
+        var v = (r[iDispo] || "").trim().toLowerCase().replace(/é/g, "e");
+        item.out = v === "non" || v === "0" || v === "false" || v === "epuise";
+        if (item.out) delete cart[id];
+      }
+    });
+    update();
+  }
+  if (SHEET_CSV_URL) {
+    fetch(SHEET_CSV_URL).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { if (t) applySheet(t); }).catch(function () {});
+  }
 
   render();
 })();
